@@ -3,30 +3,43 @@
 require "http" 
 
 puts "Welcome to Ro's Super Accurate Dictionary"
-puts "Please enter a word for its definition, top example, and pronounciation: "
-word = gets.chomp
 
-def_response = HTTP.get("https://api.wordnik.com/v4/word.json/#{word}/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key=03pgsw5yqhr4za5ql3604lcnwwdhwyznzog38048pue6ca6qy")
+switch = true
 
-word_data = def_response.parse(:json)
+while switch
+  print "Please enter a word for its definition, top example, and pronounciation: "
+  word = gets.chomp
 
-definition = word_data[0]["text"]
+  def_response = HTTP.get("https://api.wordnik.com/v4/word.json/#{word}/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key=03pgsw5yqhr4za5ql3604lcnwwdhwyznzog38048pue6ca6qy")
 
-puts ""
-puts definition
+  word_data = def_response.parse(:json)
 
-#pronounciation
-pronounciation_response = HTTP.get("https://api.wordnik.com/v4/word.json/#{word}/pronunciations?useCanonical=false&limit=50&api_key=03pgsw5yqhr4za5ql3604lcnwwdhwyznzog38048pue6ca6qy")
-pronounciation_data = pronounciation_response.parse(:json)
-pronounciation = pronounciation_data[0]["raw"]
+  definition = word_data[0]["text"]
 
-puts ""
-puts "Pronounciation: #{pronounciation}"
+  puts ""
+  puts definition
 
-#top example
-sentence_response = HTTP.get"https://api.wordnik.com/v4/word.json/#{word}/topExample?useCanonical=false&api_key=03pgsw5yqhr4za5ql3604lcnwwdhwyznzog38048pue6ca6qy"
-sentence_data = sentence_response.parse(:json)
-sentence = sentence_data["text"]
+  #pronounciation
+  pronounciation_response = HTTP.get("https://api.wordnik.com/v4/word.json/#{word}/pronunciations?useCanonical=false&limit=50&api_key=03pgsw5yqhr4za5ql3604lcnwwdhwyznzog38048pue6ca6qy")
+  pronounciation_data = pronounciation_response.parse(:json)
+  pronounciation = pronounciation_data[0]["raw"]
 
-puts ""
-puts "Example sentence: #{sentence}"
+  puts ""
+  puts "Pronounciation: #{pronounciation}"
+
+  #top example
+  sentence_response = HTTP.get"https://api.wordnik.com/v4/word.json/#{word}/topExample?useCanonical=false&api_key=03pgsw5yqhr4za5ql3604lcnwwdhwyznzog38048pue6ca6qy"
+  sentence_data = sentence_response.parse(:json)
+  sentence = sentence_data["text"]
+
+  puts ""
+  puts "Example sentence: #{sentence}"
+
+  puts ""
+  print "Do you want to input another word? (y/n) "
+  continue_prog = gets.chomp
+  if continue_prog == "n"
+    switch = false
+  end
+  puts ""
+end
