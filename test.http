@@ -1,0 +1,10 @@
+GET https://api.wordnik.com/v4/word.json/capybara/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key=03pgsw5yqhr4za5ql3604lcnwwdhwyznzog38048pue6ca6qy
+
+###
+GET https://api.wordnik.com/v4/word.json/capybara/audio?useCanonical=false&limit=50&api_key=03pgsw5yqhr4za5ql3604lcnwwdhwyznzog38048pue6ca6qy
+
+###
+GET https://api.wordnik.com/v4/word.json/capybara/topExample?useCanonical=false&api_key=03pgsw5yqhr4za5ql3604lcnwwdhwyznzog38048pue6ca6qy
+
+###
+https://api.wordnik.com/v4/word.json/capybara/pronunciations?useCanonical=false&limit=50&api_key=03pgsw5yqhr4za5ql3604lcnwwdhwyznzog38048pue6ca6qy
